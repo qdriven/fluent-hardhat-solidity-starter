@@ -18,7 +18,7 @@ describe("Lock", function () {
     const [owner, otherAccount] = await ethers.getSigners();
 
     const Lock = await ethers.getContractFactory("Lock");
-    const lock = await Lock.deploy(unlockTime, { value: lockedAmount });
+    const lock = await Lock.deploy();
 
     return { lock, unlockTime, lockedAmount, owner, otherAccount };
   }

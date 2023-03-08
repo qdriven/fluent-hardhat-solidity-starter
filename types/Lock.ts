@@ -28,15 +28,20 @@ import type {
 
 export interface LockInterface extends utils.Interface {
   functions: {
+    "owerBalance()": FunctionFragment;
     "owner()": FunctionFragment;
     "unlockTime()": FunctionFragment;
     "withdraw()": FunctionFragment;
   };
 
   getFunction(
-    nameOrSignatureOrTopic: "owner" | "unlockTime" | "withdraw"
+    nameOrSignatureOrTopic: "owerBalance" | "owner" | "unlockTime" | "withdraw"
   ): FunctionFragment;
 
+  encodeFunctionData(
+    functionFragment: "owerBalance",
+    values?: undefined
+  ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "unlockTime",
@@ -44,6 +49,10 @@ export interface LockInterface extends utils.Interface {
   ): string;
   encodeFunctionData(functionFragment: "withdraw", values?: undefined): string;
 
+  decodeFunctionResult(
+    functionFragment: "owerBalance",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "unlockTime", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "withdraw", data: BytesLike): Result;
@@ -93,6 +102,8 @@ export interface Lock extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    owerBalance(overrides?: CallOverrides): Promise<[BigNumber]>;
+
     owner(overrides?: CallOverrides): Promise<[string]>;
 
     unlockTime(overrides?: CallOverrides): Promise<[BigNumber]>;
@@ -101,6 +112,8 @@ export interface Lock extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
+
+  owerBalance(overrides?: CallOverrides): Promise<BigNumber>;
 
   owner(overrides?: CallOverrides): Promise<string>;
 
@@ -111,6 +124,8 @@ export interface Lock extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
+    owerBalance(overrides?: CallOverrides): Promise<BigNumber>;
+
     owner(overrides?: CallOverrides): Promise<string>;
 
     unlockTime(overrides?: CallOverrides): Promise<BigNumber>;
@@ -127,6 +142,8 @@ export interface Lock extends BaseContract {
   };
 
   estimateGas: {
+    owerBalance(overrides?: CallOverrides): Promise<BigNumber>;
+
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
     unlockTime(overrides?: CallOverrides): Promise<BigNumber>;
@@ -137,6 +154,8 @@ export interface Lock extends BaseContract {
   };
 
   populateTransaction: {
+    owerBalance(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     unlockTime(overrides?: CallOverrides): Promise<PopulatedTransaction>;
