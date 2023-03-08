@@ -5,12 +5,15 @@ import { Lock } from "../../types";
 import { Lock__factory } from "../../types";
 
 task("deploy:Lock")
-    .addParam("lock","lock contract for timelock")
+    .addParam("unlockTime","unlock time")
     .setAction(async function (taskArgs:TaskArguments,{ethers}) {
+        if(taskArgs.unlockTime === null){
+          taskArgs.unlockTime=1678270500
+        }
         const signers: SignerWithAddress[] = await ethers.getSigners();
         const lockFactory: Lock__factory = <Lock__factory>await ethers.getContractFactory("Lock");
         const lock: Lock = <Lock>await lockFactory.connect(signers[0])
-                .deploy(taskArgs.unlocktime); //contract contructor params
+                .deploy(); //contract contructor params
         await lock.deployed();
         console.log("Lock deployed to: ", lock.address);
-    })
+    });

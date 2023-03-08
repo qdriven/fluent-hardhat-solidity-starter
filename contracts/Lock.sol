@@ -10,13 +10,13 @@ contract Lock {
 
     event Withdrawal(uint amount, uint when);
 
-    constructor(uint _unlockTime) payable {
-        require(
-            block.timestamp < _unlockTime,
-            "Unlock time should be in the future"
-        );
+    constructor() payable {
+        // require(
+        //     block.timestamp < _unlockTime,
+        //     "Unlock time should be in the future"
+        // );
 
-        unlockTime = _unlockTime;
+        unlockTime = block.timestamp;
         owner = payable(msg.sender);
     }
 
@@ -31,4 +31,9 @@ contract Lock {
 
         owner.transfer(address(this).balance);
     }
+
+    function owerBalance() public view returns(uint256) {
+            return owner.balance;
+    }
+
 }
