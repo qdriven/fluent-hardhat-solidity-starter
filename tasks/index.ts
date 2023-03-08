@@ -1,3 +1,3 @@
 
 import "./deploy/lock"
-import "./hello.task"
+import "./deploy/hello.task"
